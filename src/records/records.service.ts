@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRecordDto } from './dto/create-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
+import { Record } from './interfaces/record.interface';
 
 @Injectable()
 export class RecordsService {
@@ -8,19 +9,27 @@ export class RecordsService {
     return 'This action adds a new record';
   }
 
-  findAll() {
-    return `This action returns all records`;
+  findAll(): Record[] {
+    return [
+      {
+        id: 'test',
+        projectId: 'hoge',
+        start: new Date(),
+        end: new Date(),
+      },
+    ];
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} record`;
+  findOne(id: string) {
+    return {
+      id,
+      projectId: 'hoge',
+      start: new Date(),
+      end: new Date(),
+    };
   }
 
-  update(id: number, updateRecordDto: UpdateRecordDto) {
-    return `This action updates a #${id} record`;
-  }
+  update(id: string, updateRecordDto: UpdateRecordDto) {}
 
-  remove(id: number) {
-    return `This action removes a #${id} record`;
-  }
+  remove(id: string) {}
 }

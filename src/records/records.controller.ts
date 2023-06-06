@@ -27,16 +27,16 @@ export class RecordsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.recordsService.findOne(+id);
+    return this.recordsService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateRecordDto: UpdateRecordDto) {
-    return this.recordsService.update(+id, updateRecordDto);
+    this.recordsService.update(id, updateRecordDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.recordsService.remove(+id);
+    this.recordsService.remove(id);
   }
 }
