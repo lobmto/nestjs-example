@@ -5,11 +5,11 @@ import { Record } from './interfaces/record.interface';
 
 @Injectable()
 export class RecordsService {
-  create(createRecordDto: CreateRecordDto) {
+  async create(createRecordDto: CreateRecordDto) {
     return 'This action adds a new record';
   }
 
-  findAll(): Record[] {
+  async findAll(): Promise<Record[]> {
     return [
       {
         id: 'test',
@@ -20,7 +20,7 @@ export class RecordsService {
     ];
   }
 
-  findOne(id: string) {
+  async findOne(id: string) {
     return {
       id,
       projectId: 'hoge',
@@ -29,7 +29,7 @@ export class RecordsService {
     };
   }
 
-  update(id: string, updateRecordDto: UpdateRecordDto) {}
+  async update(id: string, updateRecordDto: UpdateRecordDto) {}
 
-  remove(id: string) {}
+  async remove(id: string) {}
 }

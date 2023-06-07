@@ -16,27 +16,30 @@ export class RecordsController {
   constructor(private readonly recordsService: RecordsService) {}
 
   @Post()
-  create(@Body() createRecordDto: CreateRecordDto) {
+  async create(@Body() createRecordDto: CreateRecordDto) {
     return this.recordsService.create(createRecordDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.recordsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.recordsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRecordDto: UpdateRecordDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateRecordDto: UpdateRecordDto,
+  ) {
     this.recordsService.update(id, updateRecordDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     this.recordsService.remove(id);
   }
 }
