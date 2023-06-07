@@ -1,5 +1,4 @@
-export class CreateRecordDto {
-  // Todo: Validation
+export interface Record {
   readonly id: string;
   readonly projectId: string;
   readonly start: Date;
