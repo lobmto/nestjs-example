@@ -18,6 +18,11 @@ async function bootstrap() {
   await app.register(secureSession, {
     secret: 'averylogphrasebiggerthanthirtytwochars',
     salt: 'mq9hDxBVDbspDR6n',
+    cookie: {
+      httpOnly: true,
+      sameSite: 'strict',
+      // secure: true // 今回はデプロイしないので保留
+    },
   });
   await app.listen(8000);
 }
