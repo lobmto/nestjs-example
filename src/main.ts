@@ -5,7 +5,7 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import fastifyCookie from '@fastify/cookie';
-import secureSession from '@fastify/secure-session';
+import fastifySession from '@fastify/session';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -15,13 +15,12 @@ async function bootstrap() {
   await app.register(fastifyCookie, {
     secret: 'my-secret',
   });
-  await app.register(secureSession, {
+  await app.register(fastifySession, {
     secret: 'averylogphrasebiggerthanthirtytwochars',
-    salt: 'mq9hDxBVDbspDR6n',
     cookie: {
       httpOnly: true,
       sameSite: 'strict',
-      // secure: true // 今回はデプロイしないので保留
+      secure: false, // 今回はデプロイしないので保留
     },
   });
   await app.listen(8000);

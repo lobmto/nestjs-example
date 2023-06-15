@@ -20,8 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@fastify/cookie": "^8.3.0",
-    "@fastify/secure-session": "^6.1.0",
+    "@fastify/cookie": "^6.0.0",
+    "@fastify/session": "^8.2.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/mapped-types": "*",
