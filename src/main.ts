@@ -6,6 +6,8 @@ import {
 } from '@nestjs/platform-fastify';
 import fastifyCookie from '@fastify/cookie';
 import fastifySession from '@fastify/session';
+import connectRedis from 'connect-redis';
+import Redis from 'ioredis';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -17,6 +19,9 @@ async function bootstrap() {
   });
   await app.register(fastifySession, {
     secret: 'averylogphrasebiggerthanthirtytwochars',
+    store: new (connectRedis(fastifySession as any))({
+      client: new Redis(),
+    }) as any,
     cookie: {
       httpOnly: true,
       sameSite: 'strict',
