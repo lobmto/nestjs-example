@@ -7,10 +7,9 @@ export class AuthService {
   login(createAuthDto: LoginRequest, session: Session) {
     let res = createAuthDto.password === 'password';
     if (!res) throw new UnauthorizedException();
-    session.set('visits', 'sample');
+    session.set('isAuthenticated', true);
   }
   validateSession(session: Session) {
-    // Todo: セッションをredisに問い合わせる
-    if (session.get('visits') !== 'sample') throw new UnauthorizedException();
+    if (!session.get('isAuthenticated')) throw new UnauthorizedException();
   }
 }

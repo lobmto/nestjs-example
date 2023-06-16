@@ -27,6 +27,7 @@ async function bootstrap() {
       sameSite: 'strict',
       secure: false, // 今回はデプロイしないので保留
     },
+    saveUninitialized: false,
   });
   await app.listen(8000);
 }
