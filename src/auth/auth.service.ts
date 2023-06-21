@@ -1,19 +1,15 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { LoginRequest } from './dto/login-request.dto';
-import * as secureSession from '@fastify/secure-session';
+import { Session } from 'fastify';
 
 @Injectable()
 export class AuthService {
-  login(createAuthDto: LoginRequest, session: secureSession.Session) {
+  login(createAuthDto: LoginRequest, session: Session) {
     let res = createAuthDto.password === 'password';
     if (!res) throw new UnauthorizedException();
-
-    // Todo: まともなトークンを発行する
-    session.set('visits', 'sample');
+    session.set('isAuthenticated', true);
   }
-
-  validateSession(session: secureSession.Session) {
-    // Todo: セッションをredisに問い合わせる
-    if (session.get('visits') !== 'sample') throw new UnauthorizedException();
+  validateSession(session: Session) {
+    if (!session.get('isAuthenticated')) throw new UnauthorizedException();
   }
 }
