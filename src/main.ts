@@ -23,9 +23,9 @@ async function bootstrap() {
   });
   await app.register(fastifySession, {
     secret: 'averylogphrasebiggerthanthirtytwochars',
-    store: new (connectRedis(fastifySession as any))({
-      client: new Redis(),
-    }) as any,
+    // store: new (connectRedis(fastifySession as any))({
+    //   client: new Redis(),
+    // }) as any,
     cookie: {
       httpOnly: true,
       sameSite: 'strict',
