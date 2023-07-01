@@ -8,6 +8,10 @@ import fastifyCookie from '@fastify/cookie';
 import fastifySession from '@fastify/session';
 import connectRedis from 'connect-redis';
 import Redis from 'ioredis';
+import awsLambdaFastify, { PromiseHandler } from '@fastify/aws-lambda';
+import { Context, Callback, Handler } from 'aws-lambda';
+
+let server: PromiseHandler;
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -19,9 +23,9 @@ async function bootstrap() {
   });
   await app.register(fastifySession, {
     secret: 'averylogphrasebiggerthanthirtytwochars',
-    store: new (connectRedis(fastifySession as any))({
-      client: new Redis(),
-    }) as any,
+    // store: new (connectRedis(fastifySession as any))({
+    //   client: new Redis(),
+    // }) as any,
     cookie: {
       httpOnly: true,
       sameSite: 'strict',
@@ -29,6 +33,19 @@ async function bootstrap() {
     },
     saveUninitialized: false,
   });
-  await app.listen(8000);
+  await app.init();
+  // await app.listen(8000);
+  return awsLambdaFastify(app.getHttpAdapter().getInstance(), {
+    serializeLambdaArguments: true,
+  });
 }
+
+export const handler: Handler = async (
+  event: any,
+  context: Context,
+  callback: Callback,
+) => {
+  server = server ?? (await bootstrap());
+  return await server(event, context);
+};
 bootstrap();

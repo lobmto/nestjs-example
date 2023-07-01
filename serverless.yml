@@ -1,0 +1,26 @@
+service: serverless-example
+
+plugins:
+  - serverless-offline
+  - serverless-layers
+custom:
+  serverless-layers:
+    layersDeploymentBucket: nestjs-example
+
+provider:
+  name: aws
+  stage: dev
+  region: ap-northeast-1
+  runtime: nodejs14.x
+  timeout: 10
+
+functions:
+  main:
+    handler: dist/main.handler
+    events:
+      - http:
+          method: ANY
+          path: /
+      - http:
+          method: ANY
+          path: '{proxy+}'
