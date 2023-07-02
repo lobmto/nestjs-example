@@ -3,9 +3,14 @@ service: serverless-example
 plugins:
   - serverless-offline
   - serverless-layers
+  - serverless-scriptable-plugin
+
 custom:
   serverless-layers:
     layersDeploymentBucket: nestjs-example
+  scriptable:
+    hooks:
+      before:deploy:deploy: npm run build
 
 provider:
   name: aws
