@@ -7,9 +7,16 @@ import { SessionModule } from './session/session.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/auth.guard';
+import { DynamoModule } from './dynamo/dynamo.module';
 
 @Module({
-  imports: [RecordsModule, CookiesModule, SessionModule, AuthModule],
+  imports: [
+    RecordsModule,
+    CookiesModule,
+    SessionModule,
+    AuthModule,
+    DynamoModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,
