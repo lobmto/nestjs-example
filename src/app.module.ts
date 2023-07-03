@@ -8,10 +8,17 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/auth.guard';
 import { DynamoModule } from './dynamo/dynamo.module';
+import { ConfigModule } from '@nestjs/config';
+import { validate } from './env';
 
 @Module({
   imports: [
     RecordsModule,
+    ConfigModule.forRoot({
+      cache: true,
+      validate,
+      isGlobal: true,
+    }),
     CookiesModule,
     SessionModule,
     AuthModule,

@@ -10,6 +10,8 @@ import connectRedis from 'connect-redis';
 import Redis from 'ioredis';
 import awsLambdaFastify, { PromiseHandler } from '@fastify/aws-lambda';
 import { Context, Callback, Handler } from 'aws-lambda';
+import { ConfigService } from '@nestjs/config';
+import { EnvironmentVariables } from './env';
 
 let server: PromiseHandler;
 
@@ -22,7 +24,9 @@ async function bootstrap() {
     secret: 'my-secret',
   });
   await app.register(fastifySession, {
-    secret: 'averylogphrasebiggerthanthirtytwochars',
+    secret: app
+      .get(ConfigService<EnvironmentVariables, true>)
+      .get('SECRET_SESSION_KEY'),
     // store: new (connectRedis(fastifySession as any))({
     //   client: new Redis(),
     // }) as any,
