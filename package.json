@@ -24,6 +24,7 @@
     "@fastify/cookie": "^6.0.0",
     "@fastify/session": "^8.2.0",
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^3.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^9.0.0",
