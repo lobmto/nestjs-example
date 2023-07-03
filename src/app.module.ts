@@ -13,7 +13,9 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     RecordsModule,
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      cache: true,
+    }),
     CookiesModule,
     SessionModule,
     AuthModule,
