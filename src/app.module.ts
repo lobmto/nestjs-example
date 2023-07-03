@@ -17,6 +17,7 @@ import { validate } from './env';
     ConfigModule.forRoot({
       cache: true,
       validate,
+      isGlobal: true,
     }),
     CookiesModule,
     SessionModule,

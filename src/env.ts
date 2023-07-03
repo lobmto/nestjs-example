@@ -4,6 +4,8 @@ import { IsString, validateSync } from 'class-validator';
 export class EnvironmentVariables {
   @IsString()
   TABLE_NAME: string;
+  @IsString()
+  DYNAMO_ENDPOINT: string;
 }
 
 export function validate(config: Record<string, unknown>) {

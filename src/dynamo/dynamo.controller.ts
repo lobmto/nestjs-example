@@ -1,19 +1,19 @@
-import { Controller, Get, Inject, Req } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { Public } from 'src/auth/auth.decorator';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import {
-  DynamoDBDocumentClient,
-  GetCommand,
-  PutCommand,
-} from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
+import { ConfigService } from '@nestjs/config';
+import { EnvironmentVariables } from 'src/env';
 
 @Controller('dynamo')
 export class DynamoController {
   private client: DynamoDBDocumentClient;
 
-  constructor() {
+  constructor(
+    private readonly configService: ConfigService<EnvironmentVariables, true>,
+  ) {
     const dbClient = new DynamoDBClient({
-      endpoint: 'http://localhost:8000',
+      endpoint: this.configService.get('DYNAMO_ENDPOINT'),
     });
     this.client = DynamoDBDocumentClient.from(dbClient);
   }
@@ -24,7 +24,7 @@ export class DynamoController {
     // 動作テスト用
     const res = await this.client.send(
       new GetCommand({
-        TableName: 'test',
+        TableName: this.configService.get('TABLE_NAME'),
         Key: { id: '1234' },
       }),
     );
