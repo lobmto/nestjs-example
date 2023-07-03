@@ -6,6 +6,8 @@ export class EnvironmentVariables {
   TABLE_NAME: string;
   @IsString()
   DYNAMO_ENDPOINT: string;
+  @IsString()
+  SECRET_SESSION_KEY: string;
 }
 
 export function validate(config: Record<string, unknown>) {
