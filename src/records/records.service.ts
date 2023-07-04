@@ -2,9 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { CreateRecordDto } from './dto/create-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
 import { Record } from './interfaces/record.interface';
+import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
+import { RecordsRepository } from './records.repository';
 
 @Injectable()
 export class RecordsService {
+  constructor(private readonly recoredsRepository: RecordsRepository) {}
+
   async create(createRecordDto: CreateRecordDto) {
     return 'This action adds a new record';
   }
@@ -21,12 +25,7 @@ export class RecordsService {
   }
 
   async findOne(id: string) {
-    return {
-      id,
-      projectId: 'hoge',
-      start: new Date(),
-      end: new Date(),
-    };
+    return this.recoredsRepository.findOne(id);
   }
 
   async update(id: string, updateRecordDto: UpdateRecordDto) {}
