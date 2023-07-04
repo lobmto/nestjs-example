@@ -1,10 +1,5 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { RecordsService } from './records.service';
 import { RecordsRepository } from './records.repository';
 import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
-import { DynamoModule } from 'src/dynamo/dynamo.module';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { EnvironmentVariables, validate } from 'src/env';
 
 describe('RecordsRepository', () => {
   let dbClient: DynamoDBDocumentClient;
