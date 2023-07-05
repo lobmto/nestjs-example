@@ -1,10 +1,11 @@
 import { plainToInstance } from 'class-transformer';
-import { IsString, validateSync } from 'class-validator';
+import { IsOptional, IsString, validateSync } from 'class-validator';
 
 export class EnvironmentVariables {
   @IsString()
   TABLE_NAME: string;
   @IsString()
+  @IsOptional()
   DYNAMO_ENDPOINT: string;
   @IsString()
   SECRET_SESSION_KEY: string;
