@@ -1,15 +1,13 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { RecordsService } from './records.service';
+import { RecordsRepository } from './records.repository';
 
 describe('RecordsService', () => {
   let service: RecordsService;
+  let repository: RecordsRepository;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [RecordsService],
-    }).compile();
-
-    service = module.get<RecordsService>(RecordsService);
+    repository = jest.requireMock('./records.repository');
+    service = new RecordsService(repository);
   });
 
   it('should be defined', () => {

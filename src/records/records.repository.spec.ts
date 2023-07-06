@@ -10,10 +10,6 @@ describe('RecordsRepository', () => {
     repository = new RecordsRepository(dbClient);
   });
 
-  it('should be defined', () => {
-    expect(repository).toBeDefined();
-  });
-
   describe('findOne()', () => {
     it('should find a record by id', async () => {
       dbClient.send = jest

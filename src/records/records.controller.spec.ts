@@ -4,14 +4,11 @@ import { RecordsService } from './records.service';
 
 describe('RecordsController', () => {
   let controller: RecordsController;
+  let service: RecordsService;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [RecordsController],
-      providers: [RecordsService],
-    }).compile();
-
-    controller = module.get<RecordsController>(RecordsController);
+    service = jest.requireMock('./records.service');
+    controller = new RecordsController(service);
   });
 
   it('should be defined', () => {
