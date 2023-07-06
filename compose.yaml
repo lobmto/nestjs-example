@@ -1,23 +1,6 @@
 version: '3'
 
 services:
-  # https-portal:
-  #   image: steveltn/https-portal:1
-  #   restart: always
-  #   ports:
-  #     - 3443:443
-  #   environment:
-  #     DOMAINS: 'https-portal -> http://host.docker.internal:8000'
-  #     STAGE: local
-  
-  reverse-proxy:
-    image: nginx
-    ports:
-      - 8080:8080
-    volumes:
-      - ./conf.d:/etc/nginx/conf.d
-      - ./static:/usr/share/nginx/html
-  
   redis:
     image: redis
     ports:
