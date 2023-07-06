@@ -10,6 +10,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { DynamoModule } from './dynamo/dynamo.module';
 import { ConfigModule } from '@nestjs/config';
 import { validate } from './env';
+import { ApiClientModule } from './api-client/api-client.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { validate } from './env';
     SessionModule,
     AuthModule,
     DynamoModule,
+    ApiClientModule,
   ],
   controllers: [AppController],
   providers: [
