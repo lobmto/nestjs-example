@@ -86,5 +86,17 @@
     ],
     "coverageDirectory": "coverage",
     "testEnvironment": "node"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "nest-cli": {
+    "$schema": "https://json.schemastore.org/nest-cli",
+    "collection": "@nestjs/schematics",
+    "sourceRoot": "src",
+    "compilerOptions": {
+      "deleteOutDir": true
+    }
   }
 }
