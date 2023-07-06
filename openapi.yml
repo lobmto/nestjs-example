@@ -1,0 +1,33 @@
+openapi: "3.0.0"
+info:
+  title: Record API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/dev
+tags:
+  - name: records
+paths:
+  /records/{id}:
+    get:
+      operationId: get-record-by-id
+      tags:
+        - records
+      summary: get record by id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                required:
+                  - id
+                properties:
+                  id:
+                    type: string
