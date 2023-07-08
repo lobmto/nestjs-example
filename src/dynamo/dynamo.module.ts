@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { DynamoController } from './dynamo.controller';
 import { DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { ConfigService } from '@nestjs/config';
@@ -18,7 +17,6 @@ const dynamoProvider = {
 
 @Module({
   providers: [dynamoProvider],
-  controllers: [DynamoController],
   exports: [dynamoProvider],
 })
 export class DynamoModule {}
