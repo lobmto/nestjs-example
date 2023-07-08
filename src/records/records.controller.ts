@@ -34,9 +34,8 @@ export class RecordsController {
     return {
       date: res.date,
       records: res.records.map((record) => ({
-        date: res.date,
+        label: record.label,
         startedAt: record.startedAt,
-        endedAt: record.endedAt,
       })),
     };
   }

@@ -8,6 +8,10 @@ export interface paths {
     /** get daily record by date */
     get: operations['get-daily-record-by-date'];
   };
+  '/records/today/{label}': {
+    /** insert record with current time */
+    post: operations['insert-record'];
+  };
 }
 
 export type webhooks = Record<string, never>;
@@ -15,12 +19,9 @@ export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
     Record: {
-      /** Format: date */
-      date: string;
+      label: string;
       /** Format: time */
       startedAt: string;
-      /** Format: time */
-      endedAt: string;
     };
   };
   responses: never;
@@ -38,6 +39,26 @@ export interface operations {
     parameters: {
       path: {
         date: string;
+      };
+    };
+    responses: {
+      /** @description 200 response */
+      200: {
+        content: {
+          'application/json': {
+            /** Format: date */
+            date: string;
+            records: components['schemas']['Record'][];
+          };
+        };
+      };
+    };
+  };
+  /** insert record with current time */
+  'insert-record': {
+    parameters: {
+      path: {
+        label: string;
       };
     };
     responses: {

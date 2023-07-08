@@ -21,9 +21,8 @@ describe('RecordsRepository', () => {
             Item: {
               records: [
                 {
-                  date: '2023-07-07',
+                  label: 'sample',
                   startedAt: '12:00:00',
-                  endedAt: '13:00:00',
                 },
               ],
               date: '2023-07-07',
@@ -36,9 +35,8 @@ describe('RecordsRepository', () => {
         date: '2023-07-07',
         records: [
           {
-            date: '2023-07-07',
+            label: 'sample',
             startedAt: '12:00:00',
-            endedAt: '13:00:00',
           },
         ],
       });

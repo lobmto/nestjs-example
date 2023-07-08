@@ -1,8 +1,7 @@
 export type DailyRecord = {
   date: string;
   records: {
-    date: string;
+    label: string;
     startedAt: string;
-    endedAt: string;
   }[];
 };

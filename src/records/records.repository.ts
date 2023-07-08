@@ -23,9 +23,8 @@ export class RecordsRepository {
     return {
       date: records.date,
       records: records.records.map((record) => ({
-        date: record.date,
+        label: record.label,
         startedAt: record.startedAt,
-        endedAt: record.endedAt,
       })),
     };
   }
