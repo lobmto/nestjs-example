@@ -40,6 +40,15 @@ export class RecordsController {
     };
   }
 
+  @Public()
+  @Post('/today/:label')
+  async insertOne(@Param('label') label: string): Promise<RecordResponse> {
+    const res = await this.recordsService.insertOne(label);
+    return {
+      ...res,
+    };
+  }
+
   @Patch(':id')
   async update(
     @Param('id') id: string,
