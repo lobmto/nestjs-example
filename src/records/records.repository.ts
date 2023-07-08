@@ -1,6 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
+import {
+  DynamoDBDocumentClient,
+  GetCommand,
+  PutCommand,
+} from '@aws-sdk/lib-dynamodb';
 import { DailyRecord } from './dto/daily-record.dto';
+import { TimeRecord } from './dto/record.dto';
 
 @Injectable()
 export class RecordsRepository {
@@ -27,5 +32,30 @@ export class RecordsRepository {
         startedAt: record.startedAt,
       })),
     };
+  }
+
+  async insertOne(date: string, record: TimeRecord): Promise<DailyRecord> {
+    const records = (
+      await this.dynamoDBDocumentClient.send(
+        new GetCommand({
+          TableName: this.tableName,
+          Key: { date },
+        }),
+      )
+    )?.Item ?? { date, records: [] };
+
+    const updatedRecords = {
+      date,
+      records: [...records.records, record],
+    };
+
+    await this.dynamoDBDocumentClient.send(
+      new PutCommand({
+        TableName: this.tableName,
+        Item: updatedRecords,
+      }),
+    );
+
+    return updatedRecords;
   }
 }

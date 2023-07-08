@@ -1,7 +1,6 @@
+import { TimeRecord } from './record.dto';
+
 export type DailyRecord = {
   date: string;
-  records: {
-    label: string;
-    startedAt: string;
-  }[];
+  records: TimeRecord[];
 };
