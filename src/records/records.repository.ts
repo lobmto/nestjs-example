@@ -6,13 +6,13 @@ export class RecordsRepository {
   constructor(
     private readonly dynamoDBDocumentClient: DynamoDBDocumentClient,
   ) {}
-  async findOne(id: string): Promise<Record<string, any> | null> {
+  async findOne(date: string): Promise<Record<string, any> | null> {
     return (
       (
         await this.dynamoDBDocumentClient.send(
           new GetCommand({
-            TableName: 'test',
-            Key: { id },
+            TableName: 'DailyRecord',
+            Key: { date },
           }),
         )
       ).Item ?? null

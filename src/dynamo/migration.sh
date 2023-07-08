@@ -1,10 +1,10 @@
 aws dynamodb delete-table \
-    --table-name DailyRecord \
+    --table-name dev.DailyRecord \
     --no-cli-pager \
     --endpoint http://localhost:8000
 
 aws dynamodb create-table \
-    --table-name DailyRecord \
+    --table-name dev.DailyRecord \
     --attribute-definitions \
         AttributeName=date,AttributeType=S \
     --key-schema AttributeName=date,KeyType=HASH \
@@ -14,7 +14,7 @@ aws dynamodb create-table \
     --endpoint http://localhost:8000
 
 aws dynamodb put-item \
-    --table-name DailyRecord \
+    --table-name dev.DailyRecord \
     --item \
         '{"date": {"S": "2023-07-07"}, "records": {"L": [{"M": {"startAt": {"S": "12:00:00"}}}]}}' \
     --return-consumed-capacity TOTAL \

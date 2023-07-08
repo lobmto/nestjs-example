@@ -11,39 +11,47 @@ describe('RecordsRepository', () => {
   });
 
   describe('findOne()', () => {
-    it('should find a record by id', async () => {
+    it('should find a record by date', async () => {
       dbClient.send = jest
         .fn()
         .mockImplementation(async (command: GetCommand) => {
-          expect(command.input.TableName).toBe('test');
-          expect(command.input.Key).toStrictEqual({ id: '1234' });
+          expect(command.input.TableName).toBe('DailyRecord');
+          expect(command.input.Key).toStrictEqual({ date: '2023-07-07' });
           return {
             Item: {
-              message: 'This is test',
-              id: '1234',
+              records: [
+                {
+                  startAt: '12:00:00',
+                },
+              ],
+              date: '2023-07-07',
             },
           };
         });
 
-      const res = await repository.findOne('1234');
+      const res = await repository.findOne('2023-07-07');
       expect(res).toStrictEqual({
-        id: '1234',
-        message: 'This is test',
+        date: '2023-07-07',
+        records: [
+          {
+            startAt: '12:00:00',
+          },
+        ],
       });
     });
 
-    it('should return null when not existed id', async () => {
+    it('should return null when not existed date', async () => {
       dbClient.send = jest
         .fn()
         .mockImplementation(async (command: GetCommand) => {
-          expect(command.input.TableName).toBe('test');
-          expect(command.input.Key).toStrictEqual({ id: '1234' });
+          expect(command.input.TableName).toBe('DailyRecord');
+          expect(command.input.Key).toStrictEqual({ date: '2023-07-07' });
           return {
             Item: undefined,
           };
         });
 
-      const res = await repository.findOne('1234');
+      const res = await repository.findOne('2023-07-07');
       expect(res).toBe(null);
     });
   });
