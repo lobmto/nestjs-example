@@ -36,6 +36,36 @@ paths:
                   records:
                     type: array
                     items:
+                      $ref: '#/components/schemas/Record'
+  /records/today/{label}:
+    post:
+      operationId: insert-record
+      tags:
+        - records
+      summary: insert record with current time
+      parameters:
+        - in: path
+          name: label
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                required:
+                  - date
+                  - records
+                properties:
+                  date:
+                    type: string
+                    format: date
+                  records:
+                    type: array
+                    items:
                       $ref: '#/components/schemas/Record'       
 
 components:
@@ -43,16 +73,11 @@ components:
     Record:
       type: object
       required:
-        - date
+        - label
         - startedAt
-        - endedAt
       properties:
-        date:
+        label:
           type: string
-          format: date
         startedAt:
-          type: string
-          format: time
-        endedAt:
           type: string
           format: time

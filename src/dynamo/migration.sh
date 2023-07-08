@@ -16,7 +16,7 @@ aws dynamodb create-table \
 aws dynamodb put-item \
     --table-name dev.DailyRecord \
     --item \
-        '{"date": {"S": "2023-07-07"}, "records": {"L": [{"M": {"startedAt": {"S": "12:00:00"}, "endedAt": {"S": "13:00:00"}}}]}}' \
+        '{"date": {"S": "2023-07-07"}, "records": {"L": [{"M": {"label": {"S": "sample"}, "startedAt": {"S": "12:00:00"}}}]}}' \
     --return-consumed-capacity TOTAL \
     --no-cli-pager \
     --endpoint http://localhost:8000
