@@ -11,6 +11,7 @@ import { RecordsService } from './records.service';
 import { CreateRecordDto } from './dto/create-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
 import { RecordResponse } from './dto/record.response';
+import { Public } from 'src/auth/auth.decorator';
 
 @Controller('records')
 export class RecordsController {
@@ -26,6 +27,7 @@ export class RecordsController {
     return this.recordsService.findAll();
   }
 
+  @Public()
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<RecordResponse> {
     const res = await this.recordsService.findOne(id);

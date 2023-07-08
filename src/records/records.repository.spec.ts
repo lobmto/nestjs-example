@@ -7,7 +7,7 @@ describe('RecordsRepository', () => {
 
   beforeEach(async () => {
     dbClient = jest.requireMock('src/dynamo/dynamo.module');
-    repository = new RecordsRepository(dbClient);
+    repository = new RecordsRepository(dbClient, 'dev.DailyRecord');
   });
 
   describe('findOne()', () => {
@@ -15,7 +15,7 @@ describe('RecordsRepository', () => {
       dbClient.send = jest
         .fn()
         .mockImplementation(async (command: GetCommand) => {
-          expect(command.input.TableName).toBe('DailyRecord');
+          expect(command.input.TableName).toBe('dev.DailyRecord');
           expect(command.input.Key).toStrictEqual({ date: '2023-07-07' });
           return {
             Item: {
@@ -44,7 +44,7 @@ describe('RecordsRepository', () => {
       dbClient.send = jest
         .fn()
         .mockImplementation(async (command: GetCommand) => {
-          expect(command.input.TableName).toBe('DailyRecord');
+          expect(command.input.TableName).toBe('dev.DailyRecord');
           expect(command.input.Key).toStrictEqual({ date: '2023-07-07' });
           return {
             Item: undefined,

@@ -5,13 +5,14 @@ import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
 export class RecordsRepository {
   constructor(
     private readonly dynamoDBDocumentClient: DynamoDBDocumentClient,
+    private readonly tableName: string,
   ) {}
   async findOne(date: string): Promise<Record<string, any> | null> {
     return (
       (
         await this.dynamoDBDocumentClient.send(
           new GetCommand({
-            TableName: 'DailyRecord',
+            TableName: this.tableName,
             Key: { date },
           }),
         )
