@@ -11,6 +11,7 @@ import { RecordsService } from './records.service';
 import { CreateRecordDto } from './dto/create-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
 import { RecordResponse } from './dto/record.response';
+import { Public } from 'src/auth/auth.decorator';
 
 @Controller('records')
 export class RecordsController {
@@ -26,10 +27,18 @@ export class RecordsController {
     return this.recordsService.findAll();
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<RecordResponse> {
-    const res = await this.recordsService.findOne(id);
-    return { id: res?.id };
+  @Public()
+  @Get(':date')
+  async findOne(@Param('date') date: string): Promise<RecordResponse> {
+    const res = await this.recordsService.findOne(date);
+    return {
+      date: res.date,
+      records: res.records.map((record) => ({
+        date: res.date,
+        startedAt: record.startedAt,
+        endedAt: record.endedAt,
+      })),
+    };
   }
 
   @Patch(':id')

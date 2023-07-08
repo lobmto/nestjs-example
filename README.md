@@ -5,12 +5,16 @@
 ## Installation
 
 ```bash
-$ aws ssm put-parameter \
+aws ssm put-parameter \
     --name "/dev/lambda-session-key" \
     --value "averylogphrasebiggerthanthirtytwochars" \
     --type SecureString
-$ npm install
-$ npx sls deploy
+aws ssm put-parameter \
+    --name "/dev/daily-record-table" \
+    --value "dev.DailyRecord" \
+    --type String
+npm install
+npx sls deploy
 ```
 
 ## Running the app

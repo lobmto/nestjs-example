@@ -3,7 +3,7 @@ import { IsOptional, IsString, validateSync } from 'class-validator';
 
 export class EnvironmentVariables {
   @IsString()
-  TABLE_NAME: string;
+  DAILY_RECORD_TABLE: string;
   @IsString()
   @IsOptional()
   DYNAMO_ENDPOINT: string;

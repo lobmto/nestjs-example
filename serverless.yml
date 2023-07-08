@@ -37,7 +37,7 @@ provider:
           Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/test"
   environment:
     SECRET_SESSION_KEY: ${ssm:/${self:provider.stage}/lambda-session-key}
-    TABLE_NAME: test
+    DAILY_RECORD_TABLE: ${ssm:/${self:provider.stage}/daily-record-table}
 
 functions:
   main:

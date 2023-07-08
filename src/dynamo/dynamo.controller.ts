@@ -17,8 +17,8 @@ export class DynamoController {
     // 動作テスト用
     const res = await this.dbClient.send(
       new GetCommand({
-        TableName: this.configService.get('TABLE_NAME'),
-        Key: { id: '1234' },
+        TableName: this.configService.get('DAILY_RECORD_TABLE'),
+        Key: { date: '2023-07-07' },
       }),
     );
 
