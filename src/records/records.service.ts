@@ -26,7 +26,7 @@ export class RecordsService {
     ];
   }
 
-  async findOne(date: string): Promise<DailyRecord | null> {
+  async findOne(date: string) {
     return this.recoredsRepository.findOne(date);
   }
 

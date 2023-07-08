@@ -83,7 +83,7 @@ describe('RecordsRepository', () => {
             };
           } else if (command instanceof PutCommand) {
             expect(command.input.TableName).toBe('dev.DailyRecord');
-            expect(command.input.Item.date).toStrictEqual('2023-07-07');
+            expect(command.input.Item?.date).toStrictEqual('2023-07-07');
           }
         });
 
@@ -118,7 +118,7 @@ describe('RecordsRepository', () => {
             };
           } else if (command instanceof PutCommand) {
             expect(command.input.TableName).toBe('dev.DailyRecord');
-            expect(command.input.Item.date).toStrictEqual('2023-07-07');
+            expect(command.input.Item?.date).toStrictEqual('2023-07-07');
           }
         });
 
