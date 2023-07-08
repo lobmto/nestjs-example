@@ -28,10 +28,17 @@ export class RecordsController {
   }
 
   @Public()
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<RecordResponse> {
-    const res = await this.recordsService.findOne(id);
-    return { id: res?.id };
+  @Get(':date')
+  async findOne(@Param('date') date: string): Promise<RecordResponse> {
+    const res = await this.recordsService.findOne(date);
+    return {
+      date: res.date,
+      records: res.records.map((record) => ({
+        date: res.date,
+        startedAt: record.startedAt,
+        endedAt: record.endedAt,
+      })),
+    };
   }
 
   @Patch(':id')

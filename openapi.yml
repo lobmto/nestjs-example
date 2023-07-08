@@ -7,15 +7,15 @@ servers:
 tags:
   - name: records
 paths:
-  /records/{id}:
+  /records/{date}:
     get:
-      operationId: get-record-by-id
+      operationId: get-daily-record-by-date
       tags:
         - records
-      summary: get record by id
+      summary: get daily record by date
       parameters:
         - in: path
-          name: id
+          name: date
           schema:
             type: string
           required: true
@@ -27,7 +27,32 @@ paths:
             application/json:
               schema:
                 required:
-                  - id
+                  - date
+                  - records
                 properties:
-                  id:
+                  date:
                     type: string
+                    format: date
+                  records:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Record'       
+
+components:
+  schemas:
+    Record:
+      type: object
+      required:
+        - date
+        - startedAt
+        - endedAt
+      properties:
+        date:
+          type: string
+          format: date
+        startedAt:
+          type: string
+          format: time
+        endedAt:
+          type: string
+          format: time

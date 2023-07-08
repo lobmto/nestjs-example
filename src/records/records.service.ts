@@ -24,8 +24,8 @@ export class RecordsService {
     ];
   }
 
-  async findOne(id: string) {
-    return this.recoredsRepository.findOne(id);
+  async findOne(date: string) {
+    return this.recoredsRepository.findOne(date);
   }
 
   async update(id: string, updateRecordDto: UpdateRecordDto) {}

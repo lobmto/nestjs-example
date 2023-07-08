@@ -4,24 +4,40 @@
  */
 
 export interface paths {
-  '/records/{id}': {
-    /** get record by id */
-    get: operations['get-record-by-id'];
+  '/records/{date}': {
+    /** get daily record by date */
+    get: operations['get-daily-record-by-date'];
   };
 }
 
 export type webhooks = Record<string, never>;
 
-export type components = Record<string, never>;
+export interface components {
+  schemas: {
+    Record: {
+      /** Format: date */
+      date: string;
+      /** Format: time */
+      startedAt: string;
+      /** Format: time */
+      endedAt: string;
+    };
+  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
+}
 
 export type external = Record<string, never>;
 
 export interface operations {
-  /** get record by id */
-  'get-record-by-id': {
+  /** get daily record by date */
+  'get-daily-record-by-date': {
     parameters: {
       path: {
-        id: string;
+        date: string;
       };
     };
     responses: {
@@ -29,7 +45,9 @@ export interface operations {
       200: {
         content: {
           'application/json': {
-            id: string;
+            /** Format: date */
+            date: string;
+            records: components['schemas']['Record'][];
           };
         };
       };
