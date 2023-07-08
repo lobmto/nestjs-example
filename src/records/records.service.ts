@@ -4,6 +4,7 @@ import { UpdateRecordDto } from './dto/update-record.dto';
 import { Record } from './interfaces/record.interface';
 import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
 import { RecordsRepository } from './records.repository';
+import { DailyRecord } from './dto/daily-record.dto';
 
 @Injectable()
 export class RecordsService {
@@ -24,7 +25,7 @@ export class RecordsService {
     ];
   }
 
-  async findOne(date: string) {
+  async findOne(date: string): Promise<DailyRecord | null> {
     return this.recoredsRepository.findOne(date);
   }
 
