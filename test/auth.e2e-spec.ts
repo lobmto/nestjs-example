@@ -15,8 +15,6 @@ describe('AppController (e2e)', () => {
   let app: NestFastifyApplication;
 
   beforeEach(async () => {
-    console.log(Public);
-
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -47,13 +45,13 @@ describe('AppController (e2e)', () => {
   });
 
   describe('/auth (POST)', () => {
-    it('returns 201 if login succeeds', () => {
+    it('returns 200 if login succeeds', () => {
       return request(app.getHttpServer())
         .post('/auth')
         .send({
           password: 'password',
         })
-        .expect(201);
+        .expect(200);
     });
 
     it('returns 401 if the credentials are invalid', () => {

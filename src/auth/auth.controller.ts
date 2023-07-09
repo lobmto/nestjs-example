@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Req } from '@nestjs/common';
+import { Controller, Post, Body, Req, HttpCode } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginRequest as LoginRequest } from './dto/login-request.dto';
 import { Public } from './auth.decorator';
@@ -10,7 +10,11 @@ export class AuthController {
 
   @Post()
   @Public()
+  @HttpCode(200)
   login(@Body() loginAuthDto: LoginRequest, @Req() request: FastifyRequest) {
     this.authService.login(loginAuthDto, request.session);
+    return {
+      status: 'ok',
+    };
   }
 }

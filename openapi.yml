@@ -5,8 +5,28 @@ info:
 servers:
   - url: http://localhost:3000/dev
 tags:
+  - name: auth
   - name: records
 paths:
+  /auth:
+    post:
+      operationId: login
+      tags:
+        - auth
+      summary: login with password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - password
+              properties:
+                password:
+                  type: string
+      responses:
+        '200':
+          description: login successfull
+  
   /records/{date}:
     get:
       operationId: get-daily-record-by-date
