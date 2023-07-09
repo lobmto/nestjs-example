@@ -12,6 +12,7 @@ import { LoginRequest } from './dto/login.request';
 import { Public } from './auth.decorator';
 import { FastifyRequest, Session as FastifySession } from 'fastify';
 import { LoginResponse } from './dto/login.response';
+import { MyIdResponse } from './dto/my-id.response';
 
 @Controller()
 export class AuthController {
@@ -31,8 +32,8 @@ export class AuthController {
   }
 
   @Get('me/id')
-  getOwnId(@Req() request: FastifyRequest) {
-    this.authService.validateSession(request.session);
+  getOwnId(@Session() session: FastifySession): MyIdResponse {
+    this.authService.validateSession(session);
     return {
       id: 'example',
     };
