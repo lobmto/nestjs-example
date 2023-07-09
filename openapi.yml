@@ -15,6 +15,7 @@ paths:
         - auth
       summary: login with password
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -26,6 +27,15 @@ paths:
       responses:
         '200':
           description: login successfull
+          content:
+            application/json:
+              schema:
+                required:
+                  - status
+                properties:
+                  status:
+                    type: string
+                    example: ok
   
   /me/id:
     get:
