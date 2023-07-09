@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
 import fastifySession from '@fastify/session';
 import { AppModule } from 'src/app.module';
-import { Public } from 'src/auth/auth.decorator';
 import {
   FastifyAdapter,
   NestFastifyApplication,
@@ -61,6 +60,28 @@ describe('AppController (e2e)', () => {
           password: 'wrong password!',
         })
         .expect(401);
+    });
+  });
+
+  describe('/me/id (GET)', () => {
+    it('returns 200 with id', async () => {
+      const agent = request.agent(app.getHttpServer());
+      await agent.post('/auth').send({
+        password: 'password',
+      });
+      const res = await agent.get('/me/id');
+      expect(res.statusCode).toBe(200);
+      expect(res.body.id).toBe('example');
+    });
+
+    it('returns 401 if the credentials are invalid', async () => {
+      const agent = request.agent(app.getHttpServer());
+      await agent.post('/auth').send({
+        password: 'wrong password!',
+      });
+      const res = await agent.get('/me/id');
+      expect(res.statusCode).toBe(401);
+      expect(res.body.id).toBeUndefined();
     });
   });
 });

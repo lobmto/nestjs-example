@@ -27,6 +27,25 @@ paths:
         '200':
           description: login successfull
   
+  /me/id:
+    get:
+      operationId: get-my-id
+      tags:
+        - auth
+      summary: returns my id
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                required:
+                  - id
+                properties:
+                  id:
+                    type: string
+                  
   /records/{date}:
     get:
       operationId: get-daily-record-by-date
