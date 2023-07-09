@@ -1,16 +1,8 @@
-import {
-  Controller,
-  Post,
-  Body,
-  Req,
-  HttpCode,
-  Get,
-  Session,
-} from '@nestjs/common';
+import { Controller, Post, Body, HttpCode, Get, Session } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginRequest } from './dto/login.request';
 import { Public } from './auth.decorator';
-import { FastifyRequest, Session as FastifySession } from 'fastify';
+import { Session as FastifySession } from 'fastify';
 import { LoginResponse } from './dto/login.response';
 import { MyIdResponse } from './dto/my-id.response';
 
