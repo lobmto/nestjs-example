@@ -4,6 +4,14 @@
  */
 
 export interface paths {
+  '/auth': {
+    /** login with password */
+    post: operations['login'];
+  };
+  '/me/id': {
+    /** returns my id */
+    get: operations['get-my-id'];
+  };
   '/records/{date}': {
     /** get daily record by date */
     get: operations['get-daily-record-by-date'];
@@ -34,6 +42,40 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
+  /** login with password */
+  login: {
+    requestBody: {
+      content: {
+        'application/json': {
+          password: string;
+        };
+      };
+    };
+    responses: {
+      /** @description login successfull */
+      200: {
+        content: {
+          'application/json': {
+            /** @example ok */
+            status: string;
+          };
+        };
+      };
+    };
+  };
+  /** returns my id */
+  'get-my-id': {
+    responses: {
+      /** @description 200 response */
+      200: {
+        content: {
+          'application/json': {
+            id: string;
+          };
+        };
+      };
+    };
+  };
   /** get daily record by date */
   'get-daily-record-by-date': {
     parameters: {

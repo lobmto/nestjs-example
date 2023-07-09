@@ -5,8 +5,57 @@ info:
 servers:
   - url: http://localhost:3000/dev
 tags:
+  - name: auth
   - name: records
 paths:
+  /auth:
+    post:
+      operationId: login
+      tags:
+        - auth
+      summary: login with password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - password
+              properties:
+                password:
+                  type: string
+      responses:
+        '200':
+          description: login successfull
+          content:
+            application/json:
+              schema:
+                required:
+                  - status
+                properties:
+                  status:
+                    type: string
+                    example: ok
+  
+  /me/id:
+    get:
+      operationId: get-my-id
+      tags:
+        - auth
+      summary: returns my id
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                required:
+                  - id
+                properties:
+                  id:
+                    type: string
+                  
   /records/{date}:
     get:
       operationId: get-daily-record-by-date
