@@ -10,7 +10,7 @@ import fastifyCookie from '@fastify/cookie';
 import { EnvironmentVariables } from 'src/env';
 import { ConfigService } from '@nestjs/config';
 
-describe('AppController (e2e)', () => {
+describe('AuthController (e2e)', () => {
   let app: NestFastifyApplication;
 
   beforeEach(async () => {
