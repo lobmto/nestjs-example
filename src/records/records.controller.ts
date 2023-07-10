@@ -30,7 +30,7 @@ export class RecordsController {
   @Public()
   @Get(':date')
   async findOne(@Param('date') date: string): Promise<RecordResponse | null> {
-    const res = await this.recordsService.findOne(date);
+    const res = await this.recordsService.findDailyRecordByDate(date);
     if (!res) return null;
 
     return {
