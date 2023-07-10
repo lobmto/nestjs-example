@@ -27,7 +27,6 @@ export class RecordsController {
     return this.recordsService.findAll();
   }
 
-  @Public()
   @Get(':date')
   async findOne(@Param('date') date: string): Promise<RecordResponse | null> {
     const res = await this.recordsService.findDailyRecordByDate(date);
