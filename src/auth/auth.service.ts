@@ -7,9 +7,9 @@ export class AuthService {
   login(createAuthDto: LoginRequest, session: Session) {
     const res = createAuthDto.password === 'password';
     if (!res) throw new UnauthorizedException();
-    session.set('isAuthenticated', true);
+    session.isAuthenticated = true;
   }
   validateSession(session: Session) {
-    if (!session.get('isAuthenticated')) throw new UnauthorizedException();
+    if (!session.isAuthenticated) throw new UnauthorizedException();
   }
 }
