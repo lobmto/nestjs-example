@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
-import { setupApp } from 'src/common/common.spec';
+import { setupApp } from 'src/common/common-testing';
 
 describe('RecordsController (e2e)', () => {
   let app: NestFastifyApplication;

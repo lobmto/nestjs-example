@@ -10,6 +10,12 @@ import { ConfigModule } from '@nestjs/config';
 import { validate } from './env';
 import { ApiClientModule } from './api-client/api-client.module';
 
+declare module 'fastify' {
+  interface Session {
+    isAuthenticated: boolean;
+  }
+}
+
 @Module({
   imports: [
     RecordsModule,
