@@ -25,10 +25,10 @@ export const setupApp = async () => {
     new FastifyAdapter(),
   );
 
-  await app.register(fastifyCookie, {
+  await app.register(fastifyCookie as any, {
     secret: 'my-secret',
   });
-  await app.register(fastifySession, {
+  await app.register(fastifySession as any, {
     secret: app
       .get(ConfigService<EnvironmentVariables, true>)
       .get('SECRET_SESSION_KEY'),
