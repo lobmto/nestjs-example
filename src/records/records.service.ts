@@ -2,14 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { CreateRecordDto } from './dto/create-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
 import { Record } from './interfaces/record.interface';
-import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
 import { RecordsRepository } from './records.repository';
 import { DailyRecord } from './dto/daily-record.dto';
-import { TimeRecord } from './dto/record.dto';
 
 @Injectable()
 export class RecordsService {
-  constructor(private readonly recoredsRepository: RecordsRepository) {}
+  constructor(private readonly recordsRepository: RecordsRepository) {}
 
   async create(createRecordDto: CreateRecordDto) {
     return 'This action adds a new record';
@@ -26,12 +24,12 @@ export class RecordsService {
     ];
   }
 
-  async findOne(date: string) {
-    return this.recoredsRepository.findOne(date);
+  async findDailyRecordByDate(date: string): Promise<DailyRecord | null> {
+    return this.recordsRepository.findOne(date);
   }
 
   async insertOne(label: string): Promise<DailyRecord> {
-    return this.recoredsRepository.insertOne('2023-07-07', {
+    return this.recordsRepository.insertOne('2023-07-07', {
       label,
       startedAt: '12:00:00',
     });

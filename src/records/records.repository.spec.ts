@@ -10,7 +10,9 @@ describe('RecordsRepository', () => {
   let repository: RecordsRepository;
 
   beforeEach(async () => {
-    dbClient = jest.requireMock('src/dynamo/dynamo.module');
+    dbClient = new (jest.requireMock(
+      '@aws-sdk/lib-dynamodb',
+    ).DynamoDBDocumentClient)();
     repository = new RecordsRepository(dbClient, 'dev.DailyRecord');
   });
 

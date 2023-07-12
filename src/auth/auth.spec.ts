@@ -9,38 +9,13 @@ import {
 import fastifyCookie from '@fastify/cookie';
 import { EnvironmentVariables } from 'src/env';
 import { ConfigService } from '@nestjs/config';
+import { setupApp } from 'src/common/common.spec';
 
 describe('AuthController (e2e)', () => {
   let app: NestFastifyApplication;
 
   beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-    app = moduleFixture.createNestApplication<NestFastifyApplication>(
-      new FastifyAdapter(),
-    );
-
-    await app.register(fastifyCookie, {
-      secret: 'my-secret',
-    });
-    await app.register(fastifySession, {
-      secret: app
-        .get(ConfigService<EnvironmentVariables, true>)
-        .get('SECRET_SESSION_KEY'),
-      // store: new (connectRedis(fastifySession as any))({
-      //   client: new Redis(),
-      // }) as any,
-      cookie: {
-        httpOnly: true,
-        sameSite: 'strict',
-        secure: false, // 今回はデプロイしないので保留
-      },
-      saveUninitialized: false,
-    });
-
-    await app.init();
-    await app.getHttpAdapter().getInstance().ready();
+    ({ app } = await setupApp());
   });
 
   describe('/auth (POST)', () => {

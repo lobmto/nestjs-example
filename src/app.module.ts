@@ -17,6 +17,7 @@ import { ApiClientModule } from './api-client/api-client.module';
       cache: true,
       validate,
       isGlobal: true,
+      envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
     }),
     AuthModule,
     DynamoModule,
