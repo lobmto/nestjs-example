@@ -2,7 +2,6 @@ service: serverless-example
 
 plugins:
   - serverless-scriptable-plugin
-  - serverless-layers
   - serverless-offline
 
 package:
@@ -12,12 +11,9 @@ package:
     - "dist/**"
 
 custom:
-  serverless-layers:
-    layersDeploymentBucket: nestjs-example
   scriptable:
     hooks:
-      before:package:initialize: npm run build
-      offline:start:init: npm run build
+      before:package:initialize: rm -rf dist; npx ncc build src/main.ts -a -m
 
 provider:
   name: aws
@@ -41,7 +37,7 @@ provider:
 
 functions:
   main:
-    handler: dist/main.handler
+    handler: dist/index.handler
     events:
       - http:
           method: ANY
