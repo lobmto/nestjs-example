@@ -30,7 +30,7 @@ provider:
             - dynamodb:PutItem
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
-          Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/test"
+          Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/dev.DailyRecord"
   environment:
     # SECRET_SESSION_KEY: ${ssm:/${self:provider.stage}/lambda-session-key}
     # DAILY_RECORD_TABLE: ${ssm:/${self:provider.stage}/daily-record-table}
