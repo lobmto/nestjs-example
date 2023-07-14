@@ -1,9 +1,9 @@
-import request from 'supertest';
+import { setupAgent } from './common/api-test';
 
 describe('AppController (API)', () => {
   let agent;
   beforeEach(async () => {
-    agent = request.agent('http://localhost:3000/dev');
+    agent = setupAgent();
   });
 
   it('/ (GET)', () => {
