@@ -51,12 +51,12 @@ resources:
     TestTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: test
+        TableName: ${env:DAILY_RECORD_TABLE}
         AttributeDefinitions:
-          - AttributeName: id
+          - AttributeName: date
             AttributeType: S
         KeySchema:
-          - AttributeName: id
+          - AttributeName: date
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1

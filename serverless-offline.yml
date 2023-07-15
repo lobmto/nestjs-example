@@ -1,7 +1,9 @@
 service: serverless-example
 
+useDotenv: true
 plugins:
   - serverless-scriptable-plugin
+  - serverless-dynamodb
   - serverless-offline
 
 package:
@@ -14,6 +16,18 @@ custom:
   scriptable:
     hooks:
       offline:start:init: rm -rf dist; npx ncc build src/main.ts -a -m
+  serverless-dynamodb:
+    stages:
+      - dev
+    start:
+      migrate: true
+      seed: true
+      inMemory: true
+    seed:
+      domain:
+        sources:
+          - table: ${env:DAILY_RECORD_TABLE}
+            sources: [./src/dynamo/dailyRecord.json]
 
 provider:
   name: aws
@@ -51,12 +65,12 @@ resources:
     TestTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: test
+        TableName: ${env:DAILY_RECORD_TABLE}
         AttributeDefinitions:
-          - AttributeName: id
+          - AttributeName: date
             AttributeType: S
         KeySchema:
-          - AttributeName: id
+          - AttributeName: date
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
